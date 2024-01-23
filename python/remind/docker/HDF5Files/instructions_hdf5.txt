@@ -1,0 +1,16 @@
+# For HDF5
+
+Place here the folder /HDF5 within you should put the hdf file downloaded  from https://www.hdfgroup.org/downloads/hdf5/
+
+version recommended 1.12.0
+
+put untar file or if you put.tar file add the command to untar in install_hdf5.sh
+
+install_hdf5.sh will configure it build the library and use it for pytables package -- Details in DockerFile
+
+#todo maybe use already another package for hdf5 maybe more efficient
+
+.
+└───HDF5
+    └───hdf5-1.12.0 -- the untar folder downloaded from HDFGROUP
+
