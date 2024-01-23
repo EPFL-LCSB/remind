@@ -1,1 +1,10 @@
 MATLAB version for ReMIND package
+
+This module requires matTFA:
+https://github.com/EPFL-LCSB/matTFA
+Tested with solvers IBM CPLEX (v12.7.1)
+
+Run:
+1) the file_setup.m to set up the files, solver and prepare the models
+2) DiMEs_main.m to generate alternative uptake and secretion profiles
+3) make_ILP.m to constract and solve the ILP to identify interactions
