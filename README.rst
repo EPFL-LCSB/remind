@@ -116,11 +116,11 @@ script get_dimes_tutorial.py by modifying the max_alternative.
 
     ./bash_tutorial_dimes.sh
 
-After generating the DiMEs merge the DiMEs and build the community model with the following script inside Ipython.
+After generating the DiMEs merge the DiMEs and build the community model and save it with the following script inside Ipython.
 
 .. code-block:: python
 
-
+    ipython
     run build_community_model_from_dimes_tutorial.py
 
 The next step is to use the built community model and reconstruct the interaction networks with a user defined objective function
@@ -138,8 +138,12 @@ After running the ILP for various objective functions you can analyse the data i
 
 .. code-block:: python
 
-
+    ipython
     run analysis_ilp_solutions_tutorial.py
     #check the alternative cooperation patterns
     print(frame_int_coop.pos_int)
+
+
+ To then generate the figures in the manuscript you can check the scripts inside the `figures <https://github.com/EPFL-LCSB/remind/tree/master/python/remind/projects/bee_project/figures>`_ subfolder.
+
 
