@@ -126,12 +126,16 @@ After generating the DiMEs merge the DiMEs and build the community model with th
 The next step is to use the built community model and reconstruct the interaction networks with a user defined objective function
 via the ILP formulation. For this you can refer to the `run_ilp_tutorial_community_model.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/run_ilp_tutorial_community_model.py>`_ script.
 for various objective functions. To run for the indicated objective functions run the following bash script.
+
+
 .. code:: bash
 
 
     ./bash_tutorial_ilp.sh
 
 After running the ILP for various objective functions you can analyse the data inside Ipython:
+
+
 .. code-block:: python
 
 
