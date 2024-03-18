@@ -99,7 +99,11 @@ As a demo following examples can be run for the 2-member honeybee gut community 
 This tutorial aims to show the step to use our framework. Can be adapted to any community with the desired extracellular environment.
 As mentioned above in these scripts most data is saved as .h5 binary files. For this you will need hdf files downloaded if you are
 running inside docker. You can find the instructions in `instructions_hdf5.txt <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/docker/HDF5Files/instructions_hdf5.txt>`_ file.
-Or change the storing to another format  (e.g. csv).
+Or change the storing in the scripts `get_dimes_tutorial.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/get_dimes_tutorial.py>`_
+`build_community_model_from_dimes_tutorial.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/build_community_model_from_dimes_tutorial.py>`_
+and
+`run_ilp_tutorial_community_model.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/run_ilp_tutorial_community_model.py>`_
+from "to_hdf" to to another format  (e.g. csv) "to_csv".
 
 
 .. code:: bash
