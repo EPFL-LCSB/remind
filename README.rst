@@ -103,7 +103,7 @@ Or change the storing in the scripts `get_dimes_tutorial.py <https://github.com/
 `build_community_model_from_dimes_tutorial.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/build_community_model_from_dimes_tutorial.py>`_
 and
 `run_ilp_tutorial_community_model.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/run_ilp_tutorial_community_model.py>`_
-from "to_hdf" to to another format  (e.g. csv) "to_csv".
+from "to_hdf" to another format  (e.g. csv) "to_csv".
 
 
 .. code:: bash
@@ -154,4 +154,8 @@ After running the ILP for various objective functions you can analyse the data i
 
 To then generate the figures in the manuscript you can check the scripts inside the `figures <https://github.com/EPFL-LCSB/remind/tree/master/python/remind/projects/bee_project/figures>`_ subfolder.
 
+
+License
+=======
+The software in this repository is put under an APACHE licensing scheme - please see the `LICENSE <https://github.com/EPFL-LCSB/remind/blob/master/LICENSE.txt>`_ file for more details.
 
