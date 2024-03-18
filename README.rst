@@ -95,7 +95,8 @@ The installation process should not exceed a minute if the requirements are inst
 
 Quick start
 ===========
-As a demo following examples can be run for the 2-member honeybee gut community after building
+As a demo following examples can be run for the 2-member honeybee gut community after building the environment or insid ethe docker
+This tutorial aims to show the step to use our framework. Can be adapted to any community with the desired extracellular environment.
 
 .. code:: bash
         cd /
@@ -105,3 +106,14 @@ First get the DiMEs for both members by running the following bash script. Numbe
 for tutorial purposes can be changed inside the script get_dimes_tutorial.py by modifying the max_alternative
     .. code:: bash
     ./bash_tutorial_dimes.sh
+
+After generating the DiMEs merge the DiMEs and build the community model with the following script inside Ipython.
+.. code-block:: python
+    run build_community_model_from_dimes_tutorial.py
+
+The next step is to use the built community model and reconstruct the interaction networks with a user defined objective function
+via the ILP formulation. For this you can refer to the `run_ilp_tutorial_community_model.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/run_ilp_tutorial_community_model.py>`_ script.
+for various objective functions.
+To run for the indicated objective functions run the following bash script
+.. code:: bash
+    ./bash_tutorial_ilp.sh
