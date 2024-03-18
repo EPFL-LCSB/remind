@@ -359,6 +359,7 @@ def remove_redundant_sols(df,groups=['yield','alternative']):
 #get data for 7 species or more general
 
 
+
 def get_species_data(d,models_dict={},len_models=7):
 
     vars_PI = [k for k in d.variables.unique() if k.startswith('PI_')]
@@ -382,9 +383,25 @@ def get_species_data(d,models_dict={},len_models=7):
 
     pos_int = d[d.variables.isin(vars_PI)]
     neg_int = d[d.variables.isin(vars_NI)]
+    diff_pos_int=[k for k in d.alternative.unique() if k not in pos_int.alternative.unique()]
+    diff_neg_int=[k for k in d.alternative.unique() if k not in neg_int.alternative.unique()]
+    if diff_pos_int:
+        variables_list=['PI__none']*len(diff_pos_int)
+        pos_int_add=d[d.alternative.isin(diff_pos_int)].groupby('alternative').first().reset_index()[['alternative','objective','obj_num','alternation']]
+        pos_int_add['variables']=variables_list
+        pos_int=pos_int.append(pos_int_add)
+
+    if diff_neg_int:
+        variables_list=['NI__none']*len(diff_neg_int)
+        neg_int_add=d[d.alternative.isin(diff_neg_int)].groupby('alternative').first().reset_index()[['alternative','objective','obj_num','alternation']]
+        neg_int_add['variables']=variables_list
+        neg_int=neg_int.append(neg_int_add)
+
     uptakes = d[d.variables.isin(vars_UA)]
     uptakes['upt'] = [k.split('EX_')[1] for k in uptakes.variables]
     secretions = d[d.variables.isin(vars_SA)]
+    secretions['secr'] = [k.split('EX_')[1] for k in secretions.variables]
+
     yield_df = d[d.variables.isin(vars_yield)]
     abiotic = d[d.variables.isin(vars_AV)]
 
@@ -395,11 +412,13 @@ def get_species_data(d,models_dict={},len_models=7):
     if "modelofint" in d.columns:
         grouping = ['alternative', 'modelofint']
 
+
     frame_int = pos_int.groupby(grouping).apply(
         lambda gr: tuple([k.replace('PI__', '') for k in gr.variables.unique()])).reset_index(name='pos_int')
     frame_int['neg_int'] = neg_int.groupby(grouping).apply(
         lambda gr: tuple(np.sort([k.replace('NI__', '') for k in gr.variables.unique()]))).reset_index(name='neg_int')[
         'neg_int']
+
 
     for key,value in models_dict.items():
         frame_int['{}_uptake'.format(value)] = uptakes.groupby(grouping).apply(lambda gr: tuple(
@@ -430,6 +449,9 @@ def get_species_data(d,models_dict={},len_models=7):
         uptakes.groupby(grouping).apply(lambda gr: dict(gr.upt.value_counts())).reset_index(name='uptake_num')[
                 'uptake_num']
 
+    frame_int['secretion_counts'] = \
+        secretions.groupby(grouping).apply(lambda gr: dict(gr.secr.value_counts())).reset_index(name='secretion_num')[
+                'secretion_num']
     if len(vars_AV):
         frame_int['abiotic'] = abiotic.groupby(grouping).apply(
             lambda gr: tuple(np.sort([k.replace('AV__', '') for k in gr.variables.unique()]))).reset_index(
@@ -438,7 +460,6 @@ def get_species_data(d,models_dict={},len_models=7):
 
 
     return frame_int
-
 
 
 #trial to get the unique dimes

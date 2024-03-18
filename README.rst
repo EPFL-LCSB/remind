@@ -93,3 +93,15 @@ If container-based installation is not preferred you can also install this modul
 
 The installation process should not exceed a minute if the requirements are installed. If they are not, it might take longer as the installer installs them first.
 
+Quick start
+===========
+As a demo following examples can be run for the 2-member honeybee gut community after building
+
+.. code:: bash
+        cd /
+        cd remind/projects/tutorial/
+
+First get the DiMEs for both members by running the following bash script. Number of alternatives are limited to 10
+for tutorial purposes can be changed inside the script get_dimes_tutorial.py by modifying the max_alternative
+    .. code:: bash
+    ./bash_tutorial_dimes.sh

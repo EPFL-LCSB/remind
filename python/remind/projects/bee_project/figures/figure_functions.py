@@ -948,7 +948,6 @@ def get_interaction_map_3_species_video(frame, positions, intr):
 
 #get data for 7 species or more general
 
-
 def get_species_data(d,models_dict={},len_models=7):
 
     vars_PI = [k for k in d.variables.unique() if k.startswith('PI_')]
@@ -972,6 +971,23 @@ def get_species_data(d,models_dict={},len_models=7):
 
     pos_int = d[d.variables.isin(vars_PI)]
     neg_int = d[d.variables.isin(vars_NI)]
+    diff_pos_int=[k for k in d.alternative.unique() if k not in pos_int.alternative.unique()]
+    diff_neg_int=[k for k in d.alternative.unique() if k not in neg_int.alternative.unique()]
+
+    """added new to avoid any errors"""
+
+    if diff_pos_int:
+        variables_list=['PI__none']*len(diff_pos_int)
+        pos_int_add=d[d.alternative.isin(diff_pos_int)].groupby('alternative').first().reset_index()[['alternative','objective','obj_num','alternation']]
+        pos_int_add['variables']=variables_list
+        pos_int=pos_int.append(pos_int_add)
+
+    if diff_neg_int:
+        variables_list=['NI__none']*len(diff_neg_int)
+        neg_int_add=d[d.alternative.isin(diff_neg_int)].groupby('alternative').first().reset_index()[['alternative','objective','obj_num','alternation']]
+        neg_int_add['variables']=variables_list
+        neg_int=neg_int.append(neg_int_add)
+
     uptakes = d[d.variables.isin(vars_UA)]
     uptakes['upt'] = [k.split('EX_')[1] for k in uptakes.variables]
     secretions = d[d.variables.isin(vars_SA)]
@@ -987,11 +1003,13 @@ def get_species_data(d,models_dict={},len_models=7):
     if "modelofint" in d.columns:
         grouping = ['alternative', 'modelofint']
 
+
     frame_int = pos_int.groupby(grouping).apply(
         lambda gr: tuple([k.replace('PI__', '') for k in gr.variables.unique()])).reset_index(name='pos_int')
     frame_int['neg_int'] = neg_int.groupby(grouping).apply(
         lambda gr: tuple(np.sort([k.replace('NI__', '') for k in gr.variables.unique()]))).reset_index(name='neg_int')[
         'neg_int']
+
 
     for key,value in models_dict.items():
         frame_int['{}_uptake'.format(value)] = uptakes.groupby(grouping).apply(lambda gr: tuple(

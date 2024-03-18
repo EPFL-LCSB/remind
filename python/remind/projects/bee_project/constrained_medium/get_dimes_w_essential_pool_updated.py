@@ -29,7 +29,7 @@ tol=1.0
 
 
 tolerance_lb=1.0/float(tol)
-tolerance=tolerance_lb*1.1
+tolerance=tolerance_lb*1.1 # a bit of gap given for the fixed yield_cut
 
 #
 # model_no=6
@@ -55,15 +55,15 @@ t=time.time()
 
 #TODO check_here
 # parsimonious='all_uptakes_mw'
-#to make the yield_constraint only on the moles of carbon
-parsimonious='c_uptakes_only_C_moles'
+#to make the yield_constraint with respect to the carbon uptake
+parsimonious='c_uptakes_only_C_moles' #yield is calc
 #parsimonious='c_uptakes'
 
 
 # path='/remind/models/bee_models/core_members/tfa_structures_corrected'
 # path='/remind/models/bee_models/core_members/tfa_real'
 path='/remind/models/bee_models/core_members/tfa_real_010922'
-path='/remind/models/bee_models/core_members/tfa_real_101023'
+path='/remind/models/bee_models/core_members/tfa_real_111023'
 
 allFiles = glob.glob(path + "/*"+"json")
 biomass_rxn='Growth'
@@ -108,8 +108,6 @@ frame_possible=pd.read_csv(data_file+"possible_c_sources_list_300822_initial.csv
 frame_union1=pd.read_hdf('/remind/projects/bee_project/constrained_medium/essential_mets/essential_mets_w_cat_repr_updated_010922_TFA.h5')
 frame_union2=pd.read_hdf('/remind/projects/bee_project/constrained_medium/essential_mets/essential_mets_w_cat_repr_updated_061023_2_TFA.h5')
 frame_union2_species = frame_union2[frame_union2.model.isin([model_name])]
-
-
 frame_union= frame_union1.append(frame_union2_species).reset_index()
 
 # frame_union= frame_union1
@@ -234,7 +232,7 @@ if model_name=='Lactobacillus_mellifer_Bin4':
 "remove them"
 list_remove=[k for k in listcarbonsources(model) if k not in c_sources_to_include]
 
-#this is to force
+#this is to force o2 uptake
 if model_name=="Snodgrassella_alvi_wkB2GF":
     model.reactions.EX_o2_e.bounds=(-25,-1)
 
@@ -335,8 +333,6 @@ constrain_sources(model,list_catabolite, max_cnsmp=max_consmp, min_cnsmp=0)
 #for sink reaction minimization
 
 
-
-
 #
 '2) get list of rxn names for parsimonious uptakes'
 if (parsimonious=='c_uptakes'):
@@ -414,11 +410,11 @@ add_size(frame,['alternative'],'alt_size')
 
 
 #output file to save the results
-output_file_all='/remind/projects/bee_project/PRAY_5_081023_010922_correct_TFA_allowed_{}_limited_carbon/{}/all_vars'.format(allowed,model.name.split('tfa_')[-1])
+output_file_all='/remind/projects/bee_project/DIMES_correct_TFA_allowed_{}_limited_carbon/{}/all_vars'.format(allowed,model.name.split('tfa_')[-1])
 if not os.path.exists(output_file_all):
     os.makedirs(output_file_all)
 
-output_file_alts='/remind/projects/bee_project/PRAY_5_081023_010922_correct_TFA_allowed_{}_limited_carbon/{}/alternatives'.format(allowed,model.name.split('tfa_')[-1])
+output_file_alts='/remind/projects/bee_project/DIMES_correct_TFA_allowed_{}_limited_carbon/{}/alternatives'.format(allowed,model.name.split('tfa_')[-1])
 if not os.path.exists(output_file_alts):
     os.makedirs(output_file_alts)
 
