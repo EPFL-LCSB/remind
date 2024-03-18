@@ -144,6 +144,7 @@ After running the ILP for various objective functions you can analyse the data i
     print(frame_int_coop.pos_int)
 
 
- To then generate the figures in the manuscript you can check the scripts inside the `figures <https://github.com/EPFL-LCSB/remind/tree/master/python/remind/projects/bee_project/figures>`_ subfolder.
+
+To then generate the figures in the manuscript you can check the scripts inside the `figures <https://github.com/EPFL-LCSB/remind/tree/master/python/remind/projects/bee_project/figures>`_ subfolder.
 
 
