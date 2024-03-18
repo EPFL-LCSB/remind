@@ -99,13 +99,12 @@ As a demo following examples can be run for the 2-member honeybee gut community 
 This tutorial aims to show the step to use our framework. Can be adapted to any community with the desired extracellular environment.
 
 .. code:: bash
-        cd /
-        cd remind/projects/tutorial/
+        cd /remind/projects/tutorial/
 
 First get the DiMEs for both members by running the following bash script. Number of alternatives are limited to 10
 for tutorial purposes can be changed inside the `get_dimes_tutorial.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/get_dimes_tutorial.py>`_ script.
 script get_dimes_tutorial.py by modifying the max_alternative.
-    .. code:: bash
+.. code:: bash
     ./bash_tutorial_dimes.sh
 
 After generating the DiMEs merge the DiMEs and build the community model with the following script inside Ipython.
@@ -115,12 +114,12 @@ After generating the DiMEs merge the DiMEs and build the community model with th
 The next step is to use the built community model and reconstruct the interaction networks with a user defined objective function
 via the ILP formulation. For this you can refer to the `run_ilp_tutorial_community_model.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/run_ilp_tutorial_community_model.py>`_ script.
 for various objective functions. To run for the indicated objective functions run the following bash script.
-    .. code:: bash
+.. code:: bash
     ./bash_tutorial_ilp.sh
 
 After running the ILP for various objective functions you can analyse the data inside Ipython:
 .. code-block:: python
     run analysis_ilp_solutions_tutorial.py
     #check the alternative cooperation patterns
-     print(frame_int_coop.pos_int)
+    print(frame_int_coop.pos_int)
 
