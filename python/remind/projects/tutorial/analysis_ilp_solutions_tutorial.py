@@ -1,80 +1,14 @@
-
 """
-
 @author: ReMIND Team
 """
-
-import pandas as pd
-import numpy as np
-# from figure_functions import *
-from remind.io.json import load_json_model
-from remind.optim.variables import PositiveInteraction, NegativeInteraction, \
-    UptakeActivation, SecretionActivation, YieldUse
-from remind.optim.alternatives import find_alternative_solutions
 from remind.utils.postprocessing import *
-from pytfa.optim.utils import symbol_sum
-#
 import os
 import glob
-from sys import argv
 import pandas as pd
-import numpy as np
-import matplotlib.cm as cm
-import matplotlib.pyplot as plt
 
 comm_name = '2_member_bee'
 
-
-model_of_int_list=[['Gilliamella_apicola_wkB1GF','Lactobacillus_mellifer_Bin4'],
-            ['Gilliamella_apicola_wkB1GF','Lactobacillus_mellifer_Bin4','Snodgrassella_alvi_wkB2GF'],
-            ['Gilliamella_apicola_wkB1GF','Lactobacillus_mellis_Hon2'],
-            ['Gilliamella_apicola_wkB1GF','Lactobacillus_mellis_Hon2','Snodgrassella_alvi_wkB2GF'],
-            ['Gilliamella_apicola_wkB1GF','Lactobacillus_apis_Hma11GF'],
-            ['Gilliamella_apicola_wkB1GF','Lactobacillus_apis_Hma11GF','Snodgrassella_alvi_wkB2GF'],
-            ['Gilliamella_apicola_wkB1GF', 'Bifidobacterium_asteroides_PRL2011GF', 'Snodgrassella_alvi_wkB2GF'],
-            ['Bifidobacterium_asteroides_PRL2011GF', 'Snodgrassella_alvi_wkB2GF'],
-            ['Gilliamella_apicola_wkB1GF', 'Bifidobacterium_asteroides_PRL2011GF'],
-            ['Gilliamella_apicola_wkB1GF', 'Snodgrassella_alvi_wkB2GF'],
-            ]
-
-model_of_int_list=[
-            ['Gilliamella_apicola_wkB1GF', 'Bifidobacterium_asteroides_PRL2011GF', 'Snodgrassella_alvi_wkB2GF'],
-
-
-            ]
-def add_label(df, group=[""],name='abiotic', overshoot=0):
-    df['label_{}'.format(name)] = df.groupby(by=group).grouper.group_info[0] + overshoot
-
-output_file_figures="/remind/projects/bee_project/constrained_medium/analysis/figures_updated"
-if not os.path.exists(output_file_figures):
-    os.makedirs(output_file_figures)
-
-
-data_path = '/remind/projects/bee_project/ilp_solutions_031022_{}'.format(comm_name)
-
-
-
-data_path = '/remind/projects/bee_project/241022_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-data_path = '/remind/projects/bee_project/101122_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-data_path = '/remind/projects/bee_project/101122_2_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-data_path = '/remind/projects/bee_project/111122_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-data_path = '/remind/projects/bee_project/111122_2_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-data_path = '/remind/projects/bee_project/111122_3_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-data_path = '/remind/projects/bee_project/111122_new_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-data_path = '/remind/projects/bee_project/111122_newest_2_data_integ_ilp_solutions_2_member_bee'.format(comm_name)
-
-data_path='/remind/projects/bee_project/060623_ilp_solutions_nplusone_2_member_bee/obj_num_2_modelofint_10_alternatives_interaction_positive_directional_general_yield/'
-
-data_path="/remind/projects/bee_project/ilp_solutions_280823_nplusone_2_member_bee"
-
-
-
-data_path="/remind/projects/bee_project/2member_081023_ilp_solutions_031022_2_member_bee"
-
-data_path="/remind/projects/bee_project/abiotic_2member_081023_ilp_solutions_031022_2_member_bee"
-
 data_path="/remind/projects/tutorial/bee_tutorial_ilp_solutions_2_member_bee"
-
 
 
 allDirs = os.listdir(data_path)
@@ -94,10 +28,8 @@ for k in allDirs:
         obj_num = int(k.split('obj_num_')[1][0])
     if "alternatives" in k:
         alternation = k.split('alternatives_')[1]
-
     elif "alternation" in k:
         alternation = k.split('alternation_')[1]
-
     path_new = data_path + '/' + k
     allFiles = glob.glob(path_new + "/*" + "h5")
     for file in allFiles:
@@ -114,25 +46,17 @@ for k in allDirs:
 
 # contains merged all groups
 df = pd.concat(list_, ignore_index=True)
-
 df['obj_num'] = [obj_numbers[k] for k in df.obj_num]
 df.groupby(['obj_num', 'alternation']).objective.unique()
 df.groupby(['obj_num', 'alternation']).alternative.nunique()
 gb = df.groupby(['obj_num', 'alternation'])
 keys = [k for k in gb.groups.keys()]
 keys_int = [k for k in keys]
-# keys_int=[k for k in keys if 'interaction' in k]
 
-# newgrouping for n+1 studies
 if "modelofint" in df.columns:
     gb = df.groupby(['modelofint'])
     keys = [k for k in gb.groups.keys()]
     keys_int = [k for k in keys]
-
-    # groupofints = [keys_int[3], keys_int[4]]
-    #
-    # groupofints = [keys_int[5], keys_int[6]]
-    # d = pd.concat([gb.get_group(gr) for gr in groupofints])
     grouping = ['alternation', 'modelofint','obj_num']
     gb = df.groupby(grouping)
     keys = [k for k in gb.groups.keys()]

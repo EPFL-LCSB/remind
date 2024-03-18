@@ -102,7 +102,6 @@ model.add_species(species_dict.values(), **setup)
 elapsed = time.time() - t
 print('time for adding species is ', elapsed)
 #### save the model
-# filepath = ("/remind/projects/bee_project/ilp_model/model_2_member_111023.json")
 filepath = ("/remind/projects/tutorial/ilp_model_tutorial/model_2_member_180324.json")
 save_json_model(model, filepath)
 
