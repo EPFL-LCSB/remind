@@ -20,12 +20,12 @@ import cobra
 
 #these code is the one that were used for the latest analysis
 
-# _, model_num,tol=argv
-# model_no=int(model_num)
+_, model_num,tol=argv
+model_no=int(model_num)
 
-
-model_no=0
-tol=1.0
+#
+# model_no=0
+# tol=1.0
 
 
 tolerance_lb=1.0/float(tol)

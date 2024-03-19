@@ -95,7 +95,7 @@ The installation process should not exceed a minute if the requirements are inst
 
 Quick start
 ===========
-As a demo following examples can be run for the 2-member honeybee gut community after building the environment or insid ethe docker
+As a demo following examples can be run for the 2-member honeybee gut community after building the environment or inside the docker
 This tutorial aims to show the step to use our framework. Can be adapted to any community with the desired extracellular environment.
 As mentioned above in these scripts most data is saved as .h5 binary files. For this you will need hdf files downloaded if you are
 running inside docker. You can find the instructions in `instructions_hdf5.txt <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/docker/HDF5Files/instructions_hdf5.txt>`_ file.
