@@ -6,8 +6,8 @@ using decomposed in silico Minimal exchanges
 
 More information can be found in the
 The package is available for both python and matlab.
-The results in the preprint are generated with the python version.
-
+The results in the preprint are generated with the python version. The details on the matlab version and setup can be found in
+`this file <https://github.com/EPFL-LCSB/remind/blob/master/matlab/remind_matlab.txt>`_
 The package is developed using python 3.6 and run in Docker (20.10.21) containers.
 Tested with solvers cplex (v12.8.0) and gurobi(v9.1.2)
 
