@@ -112,7 +112,7 @@ script get_dimes_tutorial.py by modifying the max_alternative. The time to gener
     ./bash_tutorial_dimes.sh
 
 After generating the DiMEs merge the DiMEs and build the community model and save it with the following script inside Ipython.
-
+Generating the community model should take around 2-5 minutes.
 .. code-block:: python
 
     ipython
@@ -120,7 +120,8 @@ After generating the DiMEs merge the DiMEs and build the community model and sav
 
 The next step is to use the built community model and reconstruct the interaction networks with a user defined objective function
 via the ILP formulation. For this you can refer to the `run_ilp_tutorial_community_model.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/run_ilp_tutorial_community_model.py>`_ script.
-for various objective functions. To run for the indicated objective functions run the following bash script.
+for various objective functions. To run for the indicated objective functions run the following bash script, which runs for three different objective functions, and generates alternative patters based on different integer cuts, which is commented in the bash file.
+For each run the simulation takes around 2-10 minutes depending on the objective funciton (e.g. depending on the number of alternatives to exhaust)
 
 
 .. code:: bash
@@ -128,15 +129,20 @@ for various objective functions. To run for the indicated objective functions ru
 
     ./bash_tutorial_ilp.sh
 
-After running the ILP for various objective functions you can analyse the data inside Ipython:
+After running the ILP for various objective functions you can analyse the data inside Ipython, this step should take less than a minute.
 
 
 .. code-block:: python
 
     ipython
     run analysis_ilp_solutions_tutorial.py
-    #check the alternative cooperation patterns
+    #check the alternative maximal cooperation patterns
     print(frame_int_coop.pos_int)
+    #check the alternative minimal competition patterns
+    print(frame_int_comp.neg_int)
+    #check the alternative minimal environments
+    print(frame_int_abiot.abiotic)
+
 
 
 Reproduction of Results
