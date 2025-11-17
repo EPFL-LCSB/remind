@@ -1,15 +1,3 @@
-A package to reconstruct metabolic interaction networks in microbial communities
-using decomposed in silico Minimal exchanges
-
-1)Use DiME (in silico Minimal Exchanges)
-
-You should have your solver see instructions inside docker
-
-2) latest version of pytfa to be included in your docker file
-    if not change entrypoint in the docker file
-
-3)Files are stored as .h5 binary files for this
-
 ReMIND: Reconstruction of Microbial Interaction Networks using Decomposed in silico minimal exchanges
 ==========================================
 This repository contains the workflow to reconstruct metabolic interaction networks in microbial communities
@@ -115,7 +103,7 @@ from "to_hdf" to another format  (e.g. csv) "to_csv".
 
 First get the DiMEs for both members by running the following bash script. Number of alternatives are limited to 10
 for tutorial purposes can be changed inside the `get_dimes_tutorial.py <https://github.com/EPFL-LCSB/remind/blob/master/python/remind/projects/tutorial/get_dimes_tutorial.py>`_ script.
-script get_dimes_tutorial.py by modifying the max_alternative.
+script get_dimes_tutorial.py by modifying the max_alternative. The time to generate alternatives for each yield regime should take around 1-2 minutes for 10 alternatives. In total running the bash file for 10 biomass yield regimes for two models should take around 20 minutes. You can comment in the bash file to generate only for certain biomass yields.
 
 
 .. code:: bash
@@ -151,7 +139,8 @@ After running the ILP for various objective functions you can analyse the data i
     print(frame_int_coop.pos_int)
 
 
-
+Reproduction of Results
+=======
 To then generate the figures in the manuscript you can check the scripts inside the `figures <https://github.com/EPFL-LCSB/remind/tree/master/python/remind/projects/bee_project/figures>`_ subfolder.
 
 
