@@ -63,7 +63,7 @@ parsimonious='c_uptakes_only_C_moles' #yield is calc
 # path='/remind/models/bee_models/core_members/tfa_structures_corrected'
 # path='/remind/models/bee_models/core_members/tfa_real'
 path='/remind/models/bee_models/core_members/tfa_real_010922'
-path='/remind/models/bee_models/core_members/tfa_real_111023'
+path='/remind/models/bee_models/core_members/tfa_latest_111023'
 
 allFiles = glob.glob(path + "/*"+"json")
 biomass_rxn='Growth'

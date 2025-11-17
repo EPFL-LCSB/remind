@@ -28,7 +28,7 @@ import cobra
 # # tolerance_lb=float(tol)
 # tolerance=tolerance_lb+1e-8
 
-model_no= 0
+model_no= 6
 max_flux_lim=1.0
 tolerance_lb=1.11
 # tolerance=tolerance_lb+1e-8
@@ -70,6 +70,7 @@ parsimonious='all_uptakes_for_list'
 # path='/remind/models/bee_models/core_members/tfa_real'
 # path='/remind/models/bee_models/core_members/tfa_real_010922'
 path='/remind/models/bee_models/core_members/tfa_real_101023'
+path='/remind/models/bee_models/core_members/tfa_latest_111023'
 
 # path='/remind/models/bee_models/core_members/tfa_structures_corrected'
 
@@ -281,7 +282,7 @@ while it<max_it:
     except SolverError:
 
         max_consump+=1
-        print('Max consump constraiant for the model {} is increased now {}'.format(model.name,max_consump))
+        print('Max consump constraint for the model {} is increased now {}'.format(model.name,max_consump))
 
 
 
@@ -292,7 +293,7 @@ print("Max consumption considering CATABOLITE REPRESSION is {}".format(max_consu
 #
 # """start"""
 
-
+### this is to generate essential substrates#
 max_uptake=25
 max_secretion=25
 model = load_json_model(allFiles[model_no])
