@@ -12,6 +12,7 @@ The package is developed using python 3.6 and run in Docker (20.10.21) container
 Tested with solvers cplex (v12.8.0) and gurobi(v9.1.2)
 
 Recommended to be run in docker containers, with dedicated solver installed.
+`Installing cplex <https://www.ibm.com/support/pages/cplex-optimization-studio-v128>`_  and
 `Setting up the python API of cplex <https://www.ibm.com/docs/en/icos/22.1.0?topic=cplex-setting-up-python-api>`_  in case docker based installation is not used
 
 Generated data used in the manuscript is available under
