@@ -115,6 +115,8 @@ script get_dimes_tutorial.py by modifying the max_alternative. The time to gener
 
 After generating the DiMEs merge the DiMEs and build the community model and save it with the following script inside Ipython.
 Generating the community model should take around 2-5 minutes.
+
+
 .. code-block:: python
 
     ipython
