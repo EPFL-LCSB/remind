@@ -82,9 +82,13 @@ If container-based installation is not preferred you can also install this modul
 
 The installation process should not exceed a minute if the requirements are installed. If they are not, it might take longer as the installer installs them first.
 Please make sure you are installing it on your virtual environment activated with python 3.6. In case you run into an issue with swiglpk package (which is required by optlang) possible workaround is
-to install it via conda-forge
+to install it via conda-forge.
+
 .. code:: bash
+
     conda install conda-forge::swiglpk
+
+
 Quick start - Demo
 ===========
 As a demo following examples can be run for the 2-member honeybee gut community after building the environment or inside the docker
