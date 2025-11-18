@@ -5,10 +5,27 @@ from remind.utils.postprocessing import *
 import os
 import glob
 import pandas as pd
+from pathlib import Path
+
+
+def get_base_path():
+    """
+    Returns the base path of the installed remind package if importable.
+    Otherwise returns an empty string (or None).
+    """
+    try:
+        import remind
+        base = Path(remind.__file__).resolve().parent
+        return str(base.parents[1])
+    except ImportError:
+        # Not installed (e.g., inside docker where local tree is used)
+        return ""   # or return None
+base=get_base_path()
+
 
 comm_name = '2_member_bee'
 
-data_path="/remind/projects/tutorial/bee_tutorial_ilp_solutions_2_member_bee"
+data_path=base+"/remind/projects/tutorial/bee_tutorial_ilp_solutions_2_member_bee"
 
 
 allDirs = os.listdir(data_path)

@@ -13,7 +13,22 @@ from pytfa.optim.utils import symbol_sum
 import os
 from sys import argv
 from remind.core.medium import constrain_abiotics
+from pathlib import Path
 
+
+def get_base_path():
+    """
+    Returns the base path of the installed remind package if importable.
+    Otherwise returns an empty string (or None).
+    """
+    try:
+        import remind
+        base = Path(remind.__file__).resolve().parent
+        return str(base.parents[1])
+    except ImportError:
+        # Not installed (e.g., inside docker where local tree is used)
+        return ""   # or return None
+base=get_base_path()
 
 #default it is 0 if only wanted to stay in optimal solutions
 
@@ -32,7 +47,7 @@ obj_num=int(objective_no)
 alternation=alternation_opts[int(alt)]
 
 
-filepath=("/remind/projects/tutorial/ilp_model_tutorial/model_2_member_180324.json")
+filepath=(base+"/remind/projects/tutorial/ilp_model_tutorial/model_2_member_180324.json")
 model= load_json_model(filepath)
 
 
@@ -78,7 +93,7 @@ print("MAX COOP NUMBER IS {}".format(solution))
 
 
 # output file to save the results
-data_path = '/remind/projects/tutorial/bee_tutorial_ilp_solutions_{}/obj_num_{}_alternatives_{}'.format(comm_name, obj_num,
+data_path = base+'/remind/projects/tutorial/bee_tutorial_ilp_solutions_{}/obj_num_{}_alternatives_{}'.format(comm_name, obj_num,
                                                                                                  alternation)
 if not os.path.exists(data_path):
     os.makedirs(data_path)

@@ -13,11 +13,26 @@ import time
 import cobra
 from remind.io.json import save_json_model, load_json_model
 from pytfa.io.json import load_json_model as tfa_load_json_model
+from pathlib import Path
 
+
+def get_base_path():
+    """
+    Returns the base path of the installed remind package if importable.
+    Otherwise returns an empty string (or None).
+    """
+    try:
+        import remind
+        base = Path(remind.__file__).resolve().parent
+        return str(base.parents[1])
+    except ImportError:
+        # Not installed (e.g., inside docker where local tree is used)
+        return ""   # or return None
+base=get_base_path()
 
 "here merge your DiMEs into a combined dataframe"
 
-path="/remind/projects/tutorial/tutorial_bee_DiMEs_True_limited_carbon"
+path=base+"/remind/projects/tutorial/tutorial_bee_DiMEs_True_limited_carbon"
 allFolders = os.listdir(path)
 'get a removed list'
 list_removed=[]
@@ -40,7 +55,7 @@ frame = pd.concat(list_, ignore_index=True)
 frame_combined_all=pd.concat(list_removed, ignore_index=True) #here removed the repeating solutions across different
 # yield cuts
 
-output_file_all='/remind/projects/tutorial/dimes_stats'
+output_file_all=base+'/remind/projects/tutorial/dimes_stats'
 if not os.path.exists(output_file_all):
     os.makedirs(output_file_all)
 frame_combined_all.to_hdf(output_file_all+'/combined_dimes_unique_tutorial_bee.h5',key='s')
@@ -102,6 +117,6 @@ model.add_species(species_dict.values(), **setup)
 elapsed = time.time() - t
 print('time for adding species is ', elapsed)
 #### save the model
-filepath = ("/remind/projects/tutorial/ilp_model_tutorial/model_2_member_180324.json")
+filepath = (base+"/remind/projects/tutorial/ilp_model_tutorial/model_2_member_180324.json")
 save_json_model(model, filepath)
 

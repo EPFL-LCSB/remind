@@ -17,6 +17,23 @@ from remind.core.parsimonious import *
 
 from os.path import join
 import cobra
+from pathlib import Path
+
+
+
+def get_base_path():
+    """
+    Returns the base path of the installed remind package if importable.
+    Otherwise returns an empty string (or None).
+    """
+    try:
+        import remind
+        base = Path(remind.__file__).resolve().parent
+        return str(base.parents[1])
+    except ImportError:
+        # Not installed (e.g., inside docker where local tree is used)
+        return ""   # or return None
+base=get_base_path()
 
 #these code is the one that were used for the latest analysis
 
@@ -54,8 +71,8 @@ parsimonious='c_uptakes_only_C_moles' #yield is calc
 
 
 
-path='/remind/models/bee_models/core_members/tfa_real_101023' #for the two model dimes
-
+path=base+'/remind/models/bee_models/core_members/tfa_real_101023' #for the two model dimes
+path=base+'/remind/models/bee_models/core_members/tfa_real_101023'
 allFiles = glob.glob(path + "/*"+"json")
 biomass_rxn='Growth'
 
@@ -72,9 +89,9 @@ model_name=model.name.split('tfa_')[-1]
 native_exchanges=len(model.exchanges)
 #read experimental data checked for feasibility
 #all have only 1 alternative apart from kullabergensis
-data_file='/remind/projects/bee_project/stats/'
+data_file=base+'/remind/projects/bee_project/stats/'
 
-data_dir_cobra= '/remind/models/bee_models/core_members/carveme_models'
+data_dir_cobra=base+'/remind/models/bee_models/core_members/carveme_models'
 model_cobra=cobra.io.read_sbml_model(join(data_dir_cobra,"{}.xml".format(model_name)))
 # model_name=allFolders[model_no].split(".xml")[0]
 # t=time.time()
@@ -85,8 +102,8 @@ frame_possible=pd.read_csv(data_file+"possible_c_sources_list_300822_initial.csv
 
 
 "union of essential metabolites data"
-frame_union1=pd.read_hdf('/remind/projects/bee_project/constrained_medium/essential_mets/essential_mets_w_cat_repr_updated_010922_TFA.h5')
-frame_union2=pd.read_hdf('/remind/projects/bee_project/constrained_medium/essential_mets/essential_mets_w_cat_repr_updated_061023_2_TFA.h5')
+frame_union1=pd.read_hdf(base+'/remind/projects/bee_project/constrained_medium/essential_mets/essential_mets_w_cat_repr_updated_010922_TFA.h5')
+frame_union2=pd.read_hdf(base+'/remind/projects/bee_project/constrained_medium/essential_mets/essential_mets_w_cat_repr_updated_061023_2_TFA.h5')
 frame_union2_species = frame_union2[frame_union2.model.isin([model_name])]
 frame_union= frame_union1.append(frame_union2_species).reset_index()
 
@@ -123,7 +140,7 @@ c_sources_to_include=list(set(list_possible+met_pool))
 #activate this anyways
 """this was for fdp now with thermo firsttry without fdp"""
 if model_name=='Gilliamella_apicola_wkB1GF':
-    frame_fdp=pd.read_hdf('/remind/projects/bee_project/constrained_medium/fdp_stats/all_fdps_for_bee_gapicola_050822.h5')
+    frame_fdp=pd.read_hdf(base+'/remind/projects/bee_project/constrained_medium/fdp_stats/all_fdps_for_bee_gapicola_050822.h5')
     list_fdp=[]
     for fdp in frame_fdp.fdp_list:
         list_fdp+=fdp
@@ -301,11 +318,11 @@ add_size(frame,['alternative'],'alt_size')
 
 
 #output file to save the results
-output_file_all='/remind/projects/tutorial/tutorial_bee_DiMEs_{}_limited_carbon/{}/all_vars'.format(allowed,model.name.split('tfa_')[-1])
+output_file_all=base+'/remind/projects/tutorial/tutorial_bee_DiMEs_{}_limited_carbon/{}/all_vars'.format(allowed,model.name.split('tfa_')[-1])
 if not os.path.exists(output_file_all):
     os.makedirs(output_file_all)
 
-output_file_alts='/remind/projects/tutorial/tutorial_bee_DiMEs_{}_limited_carbon/{}/alternatives'.format(allowed,model.name.split('tfa_')[-1])
+output_file_alts=base+'/remind/projects/tutorial/tutorial_bee_DiMEs_{}_limited_carbon/{}/alternatives'.format(allowed,model.name.split('tfa_')[-1])
 if not os.path.exists(output_file_alts):
     os.makedirs(output_file_alts)
 
