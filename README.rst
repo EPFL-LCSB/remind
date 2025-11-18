@@ -9,7 +9,7 @@ The package is available for both python and matlab.
 The results in the preprint are generated with the python version. The details on the matlab version and setup can be found in
 `this file <https://github.com/EPFL-LCSB/remind/blob/master/matlab/remind_matlab.txt>`_
 The package is developed using python 3.6 and run in Docker (20.10.21) containers.
-Tested with solvers cplex (v12.8.0) and gurobi(v9.1.2)
+Tested with solvers cplex (v12.8.0) and gurobi(v9.1.2) and tested on both Linux and macOS operating systems.
 
 Recommended to be run in docker containers, with dedicated solver installed.
 `Installing cplex <https://www.ibm.com/support/pages/cplex-optimization-studio-v128>`_  and
@@ -32,7 +32,7 @@ You will need to have `Git-LFS <https://git-lfs.github.com/>`_ in order to prope
 
 Further the following pip-python packages are required (can be found in detail in requirements.txt
 
-    - optlang
+    - optlang==1.6.0
     - cobra==0.17.1
     - numpy<=1.17.4
     - pandas
@@ -81,9 +81,11 @@ If container-based installation is not preferred you can also install this modul
     pip install -e /path/to/remind
 
 The installation process should not exceed a minute if the requirements are installed. If they are not, it might take longer as the installer installs them first.
-Please make sure you are installing it on your virtual environment activated with python 3.6.
-
-Quick start
+Please make sure you are installing it on your virtual environment activated with python 3.6. In case you run into an issue with swiglpk package (which is required by optlang) possible workaround is
+to install it via conda-forge
+.. code:: bash
+    conda install conda-forge::swiglpk
+Quick start - Demo
 ===========
 As a demo following examples can be run for the 2-member honeybee gut community after building the environment or inside the docker
 This tutorial aims to show the step to use our framework. Can be adapted to any community with the desired extracellular environment.
