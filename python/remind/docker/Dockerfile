@@ -1,4 +1,5 @@
-FROM python:3.6-stretch
+FROM python:3.6-buster
+# FROM python:3.6-stretch
 
 
 USER root
