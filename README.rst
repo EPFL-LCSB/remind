@@ -54,7 +54,7 @@ Container-based install
 You might want to use this program inside of a container. The
 |docker|_
 subfolder has all the necessary information and source files to set it
-up.
+up. Please clone the `pytfa repository <https://github.com/EPFL-LCSB/pytfa>`_  under the docker folder, or change the entrypoint and pip install it.
 
 .. |docker| replace:: ``docker/``
 .. _docker: https://github.com/EPFL-LCSB/remind/tree/master/python/remind/docker
@@ -78,9 +78,10 @@ If container-based installation is not preferred you can also install this modul
 .. code:: bash
 
     git clone https://github.com/EPFL-LCSB/remind.git /path/to/remind/python
-    pip3 install -e /path/to/remind
+    pip install -e /path/to/remind
 
 The installation process should not exceed a minute if the requirements are installed. If they are not, it might take longer as the installer installs them first.
+Please make sure you are installing it on your virtual environment activated with python 3.6.
 
 Quick start
 ===========
