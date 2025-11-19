@@ -89,6 +89,14 @@ to install it via conda-forge.
     conda install conda-forge::swiglpk
 
 
+Alternatively, we provide the environment.yml file, without cplex (as you need the license for this). Using this yml file and conda you can build the environment with all dependencies to run simulations.
+.. code:: bash
+
+    conda env create -f environment.yml -n remind_test
+    conda activate remind_test
+
+The installation process should not exceed a minute if the requirements are installed.
+
 Quick start - Demo
 ===========
 As a demo following examples can be run for the 2-member honeybee gut community after building the environment or inside the docker
