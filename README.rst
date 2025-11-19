@@ -98,6 +98,7 @@ Alternatively, we provide the environment.yml file, without cplex (as you need t
     conda activate remind_test
 
 The installation process should not exceed a minute if the requirements are installed. If not it should take approximately 5 minutes.
+Please then install your solver of preference (e.g. cplex) to your environment as described above.
 
 Quick start - Demo
 ===========
