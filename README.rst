@@ -72,7 +72,7 @@ Building the docker image takes approximately 5 mins.
 
 Setup
 =====
-If container-based installation is not preferred you can also install this module from source using ``pip``:
+If container-based installation is not preferred you can also install this module from source using ``pip``, or alternatively using the environment.yml file and conda (See below)
 *For Python 3, you might have to use* ``pip3`` *instead of* ``pip``
 
 .. code:: bash
